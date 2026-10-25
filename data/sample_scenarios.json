@@ -1,0 +1,118 @@
+{
+  "scenario_1_propagation": {
+    "title": "Post-Offer Start Date & Address Change Propagation",
+    "description": "Candidate signed offer for Nov 2, but pushed start date to Nov 16 and updated address. System ripples changes across Workday, Okta, ExpoIT, and Cohort Tracker.",
+    "initial_hire": {
+      "hire_id": "HIRE-1001",
+      "ashby_id": "CAN-101",
+      "first_name": "Elena",
+      "last_name": "Rostova",
+      "email": "elena.rostova@betterup.co",
+      "personal_email": "elena.rostova.personal@gmail.com",
+      "role_title": "Senior Product Designer",
+      "department": "Design",
+      "manager_email": "sarah.lead@betterup.co",
+      "start_date": "2026-11-02",
+      "address": {
+        "street1": "1200 Market Street",
+        "street2": "Apt 5",
+        "city": "San Francisco",
+        "state": "CA",
+        "postal_code": "94102",
+        "country": "US"
+      },
+      "hardware_sku": "MBP-14-M3-36GB",
+      "cohort_name": "2026-11-A"
+    },
+    "update_payload": {
+      "hire_id": "HIRE-1001",
+      "start_date": "2026-11-16",
+      "address": {
+        "street1": "450 Mission Street",
+        "street2": "Apt 12B",
+        "city": "San Francisco",
+        "state": "CA",
+        "postal_code": "94105",
+        "country": "US"
+      }
+    }
+  },
+  "scenario_2_bad_data_cascade": {
+    "title": "Semantic Ambiguity & Typo Auto-Resolution",
+    "description": "Candidate entered '100 main street ste 400' in Ashby while Workday had '100 Main St, Suite 400'. Claude reasons over semantic equivalence and normalizes to standard postal format.",
+    "candidate_record": {
+      "hire_id": "HIRE-1002",
+      "ashby_id": "CAN-102",
+      "first_name": "Marcus",
+      "last_name": "Chen",
+      "email": "marcus.chen@betterup.co",
+      "personal_email": "mchen.dev@gmail.com",
+      "role_title": "Staff Backend Engineer",
+      "department": "Engineering",
+      "manager_email": "alex.eng@betterup.co",
+      "start_date": "2026-11-09",
+      "address": {
+        "street1": "100 Main Street",
+        "street2": "Suite 400",
+        "city": "Austin",
+        "state": "TX",
+        "postal_code": "78701",
+        "country": "US"
+      }
+    }
+  },
+  "scenario_3_sla_gate_breach": {
+    "title": "Unmonitored SLA Gate Breaches",
+    "description": "Candidate start date is in 5 days (T-5), but IT Hardware form is missing, background check is incomplete, and no laptop is dispatched.",
+    "hire_record": {
+      "hire_id": "HIRE-1003",
+      "first_name": "Priya",
+      "last_name": "Patel",
+      "email": "priya.patel@betterup.co",
+      "personal_email": "priya.patel.hire@gmail.com",
+      "role_title": "Enterprise Customer Success Manager",
+      "department": "Customer Success",
+      "manager_email": "rachel.cs@betterup.co",
+      "start_date": "2026-10-30",
+      "address": {
+        "street1": "742 Evergreen Terrace",
+        "street2": null,
+        "city": "Springfield",
+        "state": "OR",
+        "postal_code": "97477",
+        "country": "US"
+      },
+      "hardware_sku": "MBP-14-M3-36GB",
+      "hardware_status": "NOT_ORDERED",
+      "it_hardware_form_completed": false,
+      "background_check_status": "PENDING",
+      "okta_status": "NOT_STAGED",
+      "cohort_name": "2026-10-B"
+    }
+  },
+  "scenario_4_off_cycle_hire": {
+    "title": "Off-Cycle Hire Created Directly in Workday",
+    "description": "Executive/contractor hired outside of Ashby ATS. Workday creation event captured and synchronized down to Okta, ExpoIT, and Cohort Tracker.",
+    "workday_record": {
+      "hire_id": "HIRE-9009",
+      "workday_id": "WKD-9009",
+      "first_name": "David",
+      "last_name": "Kim",
+      "email": "david.kim@betterup.co",
+      "personal_email": "dkim.exec@gmail.com",
+      "role_title": "VP of Product Marketing",
+      "department": "Marketing",
+      "manager_email": "cmo@betterup.co",
+      "start_date": "2026-11-23",
+      "address": {
+        "street1": "88 Colin P Kelly Jr St",
+        "street2": null,
+        "city": "San Francisco",
+        "state": "CA",
+        "postal_code": "94107",
+        "country": "US"
+      },
+      "hardware_sku": "MBP-16-M3-64GB"
+    }
+  }
+}
